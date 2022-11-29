@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/acme-challenge-type: dns01
+    cert-manager.io/acme-dns01-provider: route53
+    cert-manager.io/cluster-issuer: certissueraddon-ct-acme-issuer
+    kubernetes.io/ingress.class: inginx 
+    nginx.ingress.kubernetes.io/backend-protocol: HTTP  
+  labels:
+    app: webhook-listener
+  name: webhook-listener-ingress
+  namespace: infrastructure-qa-ctoperations
+spec:
+  rules:
+  - host: webhooklistener.cp.eks.qa.useast1.cloudtrust.rocks
+    http:
+      paths:
+      - backend:
+          serviceName: webhook-listener-service
+          servicePort: 5000
+        path: /
+        pathType: ImplementationSpecific
+  tls:
+  - hosts:
+    - webhooklistener.cp.eks.qa.useast1.cloudtrust.rocks
+    secretName: webhooklistener-ssl-cert
