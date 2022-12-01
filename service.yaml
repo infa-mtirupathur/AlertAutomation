@@ -5,6 +5,7 @@ metadata:
   name:  webhook-listener-service
 spec:
   type: ClusterIP
+  clusterIP: ""
   ports:
   - name: http
     port: 80

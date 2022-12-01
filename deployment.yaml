@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: webhook-listener
-        image: infacloud-ct-docker.jfrog.io/foundation/ctops/webhook:v1
+        image: infacloud-ct-docker.jfrog.io/foundation/ctops/webhook:v3
         imagePullPolicy: IfNotPresent
         ports:
           - containerPort: 5000
